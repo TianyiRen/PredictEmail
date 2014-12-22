@@ -10,6 +10,7 @@ class EmailAddress(models.Model):
     email = models.CharField(
         max_length=256, blank=True, null=True)
     pattern = models.ForeignKey('predict.Pattern', blank=True, null=True)
+    verified = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'Email Address'
@@ -56,3 +57,7 @@ class Pattern(models.Model):
 
     def __unicode__(self):
         return '{domain} => {pattern} {probability}'.format(domain=self.domain, pattern=self.pattern, probability=self.probability)
+
+    @property
+    def display_probability(self):
+        return "{:.0%}".format(self.probability)

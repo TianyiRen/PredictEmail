@@ -19,7 +19,7 @@ def parse_dataset(dataset):
 
         for pattern in patterns:
             email_address_record, created = EmailAddress.objects.get_or_create(
-                first_name=first_name, last_name=last_name, email=email)
+                first_name=first_name, last_name=last_name, email=email, verified=True)
             if created:
                 pattern_record, success = Pattern.objects.get_or_create(
                     domain=domain, pattern=pattern)

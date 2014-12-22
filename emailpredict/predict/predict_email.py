@@ -6,7 +6,7 @@ from predict.parse_dataset import update_patterns_probability
 
 def predict_email(first_name, last_name, domain):
     existing_email_records = EmailAddress.objects.filter(
-        first_name__iexact=first_name, last_name__iexact=last_name, domain__iexact=domain)
+        first_name__iexact=first_name, last_name__iexact=last_name, domain__iexact=domain).order_by('-pattern__probability')
     if existing_email_records:
         return existing_email_records
 
@@ -52,8 +52,8 @@ def create_all_possible_emails(first_name, last_name, domain, patterns):
         email = create_email(
             first_name=first_name, last_name=last_name, domain=domain, pattern=pattern)
         if email:
-            emails.append(
-                {'first_name': first_name.title(), 'last_name': last_name.title(), 'email': email, 'pattern': {'probability': probability}})
+            emails.append({'full_name': '{first_name} {last_name}'.format(first_name=first_name.title(
+            ), last_name=last_name.title()), 'email': email, 'pattern': {'display_probability': "{:.0%}".format(probability)}})
     return emails
 
 
