@@ -7,29 +7,29 @@ with Django web framework with sqlite3 as backend database.
 
 ## Installation
 
-Prerequists: Python 2.6+ with <a src="https://pip.pypa.io/en/latest/installing.html#install-pip">pip</a> installed
-We will use virtual environment to make sure it will not mess up user's environment.
-Step 1 install python virtual env:
-[sudo]pip install virtualenv
-Step 2 start virtual environment:
-virtualenv ENV
-Step 3 change to virtual env folder:
-cd ENV
-Step 4 activate virtual environment:
-source bin/activate
-Step 5 git clone:
-git clone https://github.com/TianyiRen/PredictEmail.git
-Step 6 change to project folder:
-cd PredictEmail/emailpredict/
-Step 7 install required package:
-[sudo]pip install -r requirements.txt
-Step 8 synchronize database:
-python manage.py syncdb
-Step 9 migrate database:
-python manage.py migrate
-Step 10 upload dataset provided by AlphaSights:
-python manage.py upload_dataset
-Step 11 runserver:
-python manage.py runserver
-Step 12 access website via browser:
-type 127.0.0.1:8000 in browser
+Prerequists: Python 2.6+ with <a src="https://pip.pypa.io/en/latest/installing.html#install-pip">pip</a> installed<br>
+We will use virtual environment to make sure it will not mess up user's environment.<br>
+Step 1 install python virtual env:<br>
+[sudo]pip install virtualenv<br>
+Step 2 start virtual environment:<br>
+virtualenv ENV<br>
+Step 3 change to virtual env folder:<br>
+cd ENV<br>
+Step 4 activate virtual environment:<br>
+source bin/activate<br>
+Step 5 git clone:<br>
+git clone https://github.com/TianyiRen/PredictEmail.git<br>
+Step 6 change to project folder:<br>
+cd PredictEmail/emailpredict/<br>
+Step 7 install required package:<br>
+[sudo]pip install -r requirements.txt<br>
+Step 8 synchronize database:<br>
+python manage.py syncdb<br>
+Step 9 migrate database:<br>
+python manage.py migrate<br>
+Step 10 upload dataset provided by AlphaSights:<br>
+python manage.py upload_dataset<br>
+Step 11 runserver:<br>
+python manage.py runserver<br>
+Step 12 access website via browser:<br>
+type 127.0.0.1:8000 in browser<br>
