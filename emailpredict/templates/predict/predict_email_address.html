@@ -1,0 +1,35 @@
+{% extends "predict/base.html" %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit" />
+    </form>
+
+    {% if context.no_matching_domain_pattern %}
+        <p>
+            {{ context.no_matching_domain_pattern }}
+        </p>
+    {% endif %}
+
+    <span>Possible Email Addresses:</br></span>
+    <table id='predicted_emails' class='predicted_emails'>
+        {% for predict_email in context.predicted_emails %}
+            <tr>
+                <td>
+                    {{ predict_email.first_name }}
+                </td>
+                <td>
+                    {{ predict_email.last_name }}
+                </td>
+                <td>
+                    {{ predict_email.email }}
+                </td>
+                <td>
+                    {{ predict_email.pattern.probability }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
