@@ -76,4 +76,4 @@ def verify_email_ajax(request):
             logger.debug('Not able to verify email address, error: %s' % error)
 
     data = json.dumps({'verified': verified})
-    return HttpResponse(data, mimetype='application/json')
+    return HttpResponse(data, content_type='application/json')
