@@ -21,13 +21,15 @@ We will use virtual environment to make sure it will not mess up user's environm
 	_cd PredictEmail/emailpredict/_<br><br>
 7. install required package:<br>
 	_[sudo]pip install -r requirements.txt_<br><br>
-8. synchronize database:<br>
+8. Clear database:<br>
+	_python manage.py flush_<br><br>
+9. synchronize database:<br>
 	_python manage.py syncdb_<br><br>
-9. migrate database:<br>
+10. migrate database:<br>
 	_python manage.py migrate_<br><br>
-10. upload dataset provided by AlphaSights:<br>
+11. upload dataset provided by AlphaSights:<br>
 	_python manage.py uploaddataset_<br><br>
-11. runserver:<br>
+12. runserver:<br>
 	_python manage.py runserver_<br><br>
-12. access website via browser:<br>
+13. access website via browser:<br>
 	_type 127.0.0.1:8000 in browser_<br><br>
