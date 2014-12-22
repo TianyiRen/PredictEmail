@@ -1,6 +1,7 @@
 import csv
 
 from django.core.management.base import BaseCommand
+
 from predict.parse_dataset import parse_dataset
 
 
