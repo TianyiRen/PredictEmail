@@ -1,35 +1,63 @@
 {% extends "predict/base.html" %}
 
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}predict/css/predict_email_address.css" />
+{% endblock %}
+
 {% block content %}
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Submit" />
-    </form>
+    <div class="container">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" class="btn btn-default">Predict</button>
+        </form>
 
-    {% if context.no_matching_domain_pattern %}
-        <p>
-            {{ context.no_matching_domain_pattern }}
-        </p>
-    {% endif %}
+        <hr>
+        {% if context.predicted_emails %}
+            <span id='msg'>Possible Email Addresses: 
+                {% if context.no_matching_domain_pattern %}
+                    ({{ context.no_matching_domain_pattern }})
+                {% endif %}
+            </br></span>
+            <table id='predicted_emails' class='table table-striped predicted_emails'>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Probability</th>
+                    <th>Verified</th>
+                </tr>
+                {% for predict_email in context.predicted_emails %}
+                    <tr>
+                        <td>
+                            {{ predict_email.full_name }}
+                        </td>
+                        <td>
+                            <a href="mailto:{{ predict_email.email }}">{{ predict_email.email }}</a>
+                        </td>
+                        <td>
+                            {% if predict_email.verified %}
+                                100%
+                            {% else %}
+                                {{ predict_email.pattern.display_probability }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if predict_email.verified %}
+                                <span class='glyphicon glyphicon-ok'></span>
+                            {% else %}
+                                <button type="button" class="btn btn-default btn-lg verify_btn" title='Click to verify'>
+                                  Verify
+                                </button>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+</script>
+{% endblock %}
 
-    <span>Possible Email Addresses:</br></span>
-    <table id='predicted_emails' class='predicted_emails'>
-        {% for predict_email in context.predicted_emails %}
-            <tr>
-                <td>
-                    {{ predict_email.first_name }}
-                </td>
-                <td>
-                    {{ predict_email.last_name }}
-                </td>
-                <td>
-                    {{ predict_email.email }}
-                </td>
-                <td>
-                    {{ predict_email.pattern.probability }}
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+{% block extrascript %}
+    <script type='text/javascript' src="{{STATIC_URL}}predict/js/predict_email_address.js"></script>
 {% endblock %}

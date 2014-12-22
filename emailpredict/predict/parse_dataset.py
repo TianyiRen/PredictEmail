@@ -63,7 +63,7 @@ def check_pattern(first_name, last_name, email_prefix):
     return patterns
 
 
-def update_patterns_probability(domain, pattern):
+def update_patterns_probability(domain, pattern, add=True):
     ''' Update pattern probability in database '''
     domain_patterns = Pattern.objects.filter(domain__iexact=domain)
 
@@ -73,11 +73,19 @@ def update_patterns_probability(domain, pattern):
     for domain_pattern in domain_patterns:
         probability = domain_pattern.probability
         if domain_pattern.pattern == pattern:
-            probability = (
-                (total_emails_in_domain - 1) * probability + 1) / (total_emails_in_domain)
+            if add:
+                probability = (
+                    (total_emails_in_domain - 1) * probability + 1) / (total_emails_in_domain)
+            else:
+                probability = (
+                    (total_emails_in_domain + 1) * probability - 1) / (total_emails_in_domain)
             domain_pattern.probability = probability
         else:
-            probability = (
-                (total_emails_in_domain - 1) * probability) / (total_emails_in_domain)
+            if add:
+                probability = (
+                    (total_emails_in_domain - 1) * probability) / (total_emails_in_domain)
+            else:
+                probability = (
+                    (total_emails_in_domain + 1) * probability) / (total_emails_in_domain)
             domain_pattern.probability = probability
         domain_pattern.save()

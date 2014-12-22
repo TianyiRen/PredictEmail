@@ -6,7 +6,7 @@ from predict.parse_dataset import update_patterns_probability
 
 def predict_email(first_name, last_name, domain):
     existing_email_records = EmailAddress.objects.filter(
-        first_name__iexact=first_name, last_name__iexact=last_name, domain__iexact=domain).order_by('-pattern__probability')
+        first_name__iexact=first_name, last_name__iexact=last_name, domain__iexact=domain).select_related('pattern').order_by('-pattern__probability')
     if existing_email_records:
         return existing_email_records
 
