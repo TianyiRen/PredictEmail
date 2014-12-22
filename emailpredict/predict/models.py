@@ -49,7 +49,7 @@ class Pattern(models.Model):
     domain = models.CharField(max_length=100, blank=True, null=True)
     pattern = models.CharField(
         max_length=50, choices=PATTERN_CHOICES, blank=True, null=True)
-    probability = models.FloatField(default=1.00)
+    probability = models.FloatField(default=0.00)
 
     class Meta:
         verbose_name = 'Pattern'

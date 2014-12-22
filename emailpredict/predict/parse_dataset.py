@@ -68,7 +68,7 @@ def update_patterns_probability(domain, pattern, add=True):
     domain_patterns = Pattern.objects.filter(domain__iexact=domain)
 
     total_emails_in_domain = EmailAddress.objects.filter(
-        domain__iexact=domain).count()
+        domain__iexact=domain, verified=True).count()
 
     for domain_pattern in domain_patterns:
         probability = domain_pattern.probability

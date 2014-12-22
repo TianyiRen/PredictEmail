@@ -8,7 +8,7 @@ from django.template import RequestContext
 from predict.models import EmailAddress
 from predict.forms import EmailPredictForm
 from predict.predict_email import predict_email, create_all_possible_emails, get_all_patterns
-from predict.parse_dataset import update_patterns_probability
+from predict.parse_dataset import parse_dataset, update_patterns_probability
 
 logger = logging.getLogger(__name__)
 
@@ -51,22 +51,25 @@ def verify_email_ajax(request):
         email = request.GET.get('email', '').strip()
 
         try:
-            full_name = full_name.split(' ')
-            first_name = full_name[0]
-            last_name = full_name[1]
+            name = full_name.split(' ')
+            first_name = name[0]
+            last_name = name[1]
             domain = email.split('@')[1]
 
-            email_address_record = EmailAddress.objects.get(
-                first_name__iexact=first_name, last_name__iexact=last_name, email__iexact=email)
-            email_address_record.verified = True
-            email_address_record.save()
+            try:
+                email_address_record = EmailAddress.objects.get(
+                    first_name__iexact=first_name, last_name__iexact=last_name, email__iexact=email)
+                email_address_record.verified = True
+                email_address_record.save()
 
-            predicted_email_address_records = EmailAddress.objects.filter(
-                first_name__iexact=first_name, last_name__iexact=last_name, domain__iexact=domain, verified=False)
-            for predicted_email_address_record in predicted_email_address_records:
-                predicted_email_address_record.delete()
-                update_patterns_probability(
-                    domain=domain, pattern=predicted_email_address_record.pattern.pattern, add=False)
+                predicted_email_address_records = EmailAddress.objects.filter(
+                    first_name__iexact=first_name, last_name__iexact=last_name, domain__iexact=domain, verified=False)
+                for predicted_email_address_record in predicted_email_address_records:
+                    predicted_email_address_record.delete()
+                    update_patterns_probability(
+                        domain=domain, pattern=predicted_email_address_record.pattern.pattern, add=False)
+            except EmailAddress.DoesNotExist:
+                parse_dataset({full_name: email})
 
             verified = True
         except Exception as error:

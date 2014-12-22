@@ -1,7 +1,6 @@
 from __future__ import division
 
 from predict.models import EmailAddress, Pattern
-from predict.parse_dataset import update_patterns_probability
 
 
 def predict_email(first_name, last_name, domain):
@@ -19,7 +18,6 @@ def predict_email(first_name, last_name, domain):
         if email:
             email_record = EmailAddress.objects.create(
                 first_name=first_name, last_name=last_name, domain=domain, email=email, pattern=domain_pattern)
-            update_patterns_probability(domain=domain, pattern=pattern)
             predicted_emails.append(email_record)
 
     return predicted_emails
