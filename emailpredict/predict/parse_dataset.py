@@ -4,6 +4,7 @@ from predict.models import EmailAddress, Pattern
 
 
 def parse_dataset(dataset):
+    parsed_emails = []
     for name, email in dataset.items():
         name = name.split(' ')
         first_name = name[0]
@@ -20,6 +21,7 @@ def parse_dataset(dataset):
         for pattern in patterns:
             email_address_record, created = EmailAddress.objects.get_or_create(
                 first_name=first_name, last_name=last_name, email=email, verified=True)
+            parsed_emails.append(email_address_record)
             if created:
                 pattern_record, success = Pattern.objects.get_or_create(
                     domain=domain, pattern=pattern)
@@ -29,6 +31,7 @@ def parse_dataset(dataset):
                 update_patterns_probability(domain=domain, pattern=pattern)
             else:
                 break
+    return parsed_emails
 
 
 def check_pattern(first_name, last_name, email_prefix):

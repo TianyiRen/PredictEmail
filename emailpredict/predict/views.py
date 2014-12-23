@@ -1,12 +1,13 @@
 import logging
 import json
+import csv
 
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 from predict.models import EmailAddress
-from predict.forms import EmailPredictForm
+from predict.forms import EmailPredictForm, CSVFileForm
 from predict.predict_email import predict_email, create_all_possible_emails, get_all_patterns
 from predict.parse_dataset import parse_dataset, update_patterns_probability
 
@@ -77,3 +78,26 @@ def verify_email_ajax(request):
 
     data = json.dumps({'verified': verified})
     return HttpResponse(data, content_type='application/json')
+
+
+def upload_verified_emails(request):
+    parsed_emails = []
+    context = {}
+    if request.method == 'POST':
+        form = CSVFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            if request.FILES['csv_file'].content_type == 'text/csv':
+                csv_file = request.FILES['csv_file'].read()
+                rows = csv.reader(csv_file.splitlines(), delimiter=',')
+                for row in rows:
+                    name = row[0]
+                    email = row[1]
+                    dataset = {name: email}
+                    parsed_emails.extend(parse_dataset(dataset))
+                context['parsed_emails'] = parsed_emails
+            else:
+                context[
+                    'error_msg'] = 'Invalid file format! Please upload .csv format file.'
+    else:
+        form = CSVFileForm()
+    return render_to_response('predict/upload_verified_emails.html', {'form': form, 'context': context}, RequestContext(request))

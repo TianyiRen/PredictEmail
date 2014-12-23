@@ -6,7 +6,7 @@ from predict.models import EmailAddress, Pattern
 
 class EmailAddressAdmin(admin.ModelAdmin):
     search_fields = ('first_name', 'last_name', 'email', )
-    list_display = ('domain', 'full_name', 'email', )
+    list_display = ('domain', 'first_name', 'last_name', 'email', )
     ordering = ('domain', 'first_name', 'last_name', )
 
 admin.site.register(EmailAddress, EmailAddressAdmin)
