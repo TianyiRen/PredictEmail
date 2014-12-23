@@ -3,3 +3,51 @@ input[type="text"] {
     margin-right: 20px;
     margin-bottom: 0px;
 }
+
+
+.icon-question-sign:hover {
+    cursor: pointer;
+}
+
+.help_msg{
+    background: none repeat scroll 0 0 #F8F8F8;
+    border: 5px solid #DFDFDF;
+    color: #717171;
+    font-size: 13px;
+    width: 250px;
+    height: auto;
+    letter-spacing: 1px;
+    line-height: 30px;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    top: -10px;
+    left: 30px;
+    display:none;
+    padding:0 20px;
+
+}
+.help_msg:after{
+    content:'';
+    position:absolute;
+    bottom: 80%;
+    width:10px;
+    height:10px;
+    border-bottom:5px solid #dfdfdf;
+    border-left:5px solid #dfdfdf;
+    background:#f8f8f8;
+    left: -5px;
+    margin-left:-5px;
+    -moz-transform:rotate(45deg);
+    -webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
+}
+.icon-question-sign{
+    position:relative;
+    cursor:pointer;
+}
+
+.icon-question-sign:hover .help_msg{
+    display:block;
+}

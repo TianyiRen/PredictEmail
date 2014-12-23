@@ -16,4 +16,8 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('.icon-question-sign').click(function () {
+
+    });
 });
