@@ -1,7 +1,7 @@
 PredictEmail
 ============
 
-This is predicting email address project from AlphaSights. In this project, a simple website has been built to allow user enter person's first name, last name and domain to predict his/her email address. This project is built with Django web framework with sqlite3 as backend database. 
+This is predicting email address project from AlphaSights. In this project, a simple website has been built to allow user to enter person's first name, last name and domain to predict his/her email address. This project is built with Django web framework with sqlite3 as backend database. 
 
 ## Installation
 
@@ -31,3 +31,5 @@ We will use virtual environment to make sure it will not mess up user's environm
 	_python manage.py runserver_<br><br>
 12. access website via browser:<br>
 	_type 127.0.0.1:8000 in browser_<br><br>
+
+ 
