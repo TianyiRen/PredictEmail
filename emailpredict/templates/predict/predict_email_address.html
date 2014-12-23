@@ -1,4 +1,5 @@
 {% extends "predict/base.html" %}
+{% load crispy_forms_tags %}
 
 {% block extra_head %}
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}predict/css/predict_email_address.css" />
@@ -8,7 +9,7 @@
     <div class="container">
         <form action="" method="post">
             {% csrf_token %}
-            {{ form }}
+            {{ form|crispy }}
             <button type="submit" class="btn btn-default">Predict</button>
         </form>
 

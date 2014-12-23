@@ -40,6 +40,7 @@ INSTALLED_APPS = (
 
     'south',
     'bootstrap_toolkit',
+    'crispy_forms',
     'predict',
 )
 
