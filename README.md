@@ -30,7 +30,7 @@ We will use virtual environment to make sure it will not mess up user's environm
 11. runserver:<br>
 	$ python manage.py runserver<br><br>
 12. access website via browser:<br>
-	$ type 127.0.0.1:8000 in browser<br><br>
+	_type 127.0.0.1:8000 in browser_<br><br>
 
 ## Basic Idea
 To predict email address, one need to provide first name, last name and domain. Possible email address is predicted according to the probablities of possible patterns used by a company (domain). If a company is using different patterns, it will return all possible email patterns with corresponding probability (stored in the database). If we cannot verify which pattern to use, we store all possible predicted emails into the database; if we can verify one of them, we just store the verified one into the database and discard the rest. 
