@@ -11,13 +11,9 @@ $(document).ready(function () {
             },
             success: function(data) {
                 if (data.verified) {
-                    location.reload();
+                    $('#predict_form').submit();
                 }
             }
         });
-    });
-
-    $('.icon-question-sign').click(function () {
-
     });
 });

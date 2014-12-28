@@ -62,13 +62,13 @@ def verify_email_ajax(request):
                     first_name__iexact=first_name, last_name__iexact=last_name, email__iexact=email)
                 email_address_record.verified = True
                 email_address_record.save()
+                update_patterns_probability(
+                    domain=domain, pattern=email_address_record.pattern.pattern)
 
                 predicted_email_address_records = EmailAddress.objects.filter(
                     first_name__iexact=first_name, last_name__iexact=last_name, domain__iexact=domain, verified=False)
                 for predicted_email_address_record in predicted_email_address_records:
                     predicted_email_address_record.delete()
-                    update_patterns_probability(
-                        domain=domain, pattern=predicted_email_address_record.pattern.pattern, add=False)
             except EmailAddress.DoesNotExist:
                 parse_dataset({full_name: email})
 
