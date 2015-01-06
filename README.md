@@ -1,7 +1,7 @@
 PredictEmail
 ============
 
-This is predicting email address project from AlphaSights. In this project, a simple website has been built to allow user to enter person's first name, last name and domain to predict his/her email address. This project is built with Django web framework with sqlite3 as backend database. 
+This is predicting email address project from AlphaSights. In this project, a simple website has been built for users to enter person's first name, last name and domain to predict his/her email address. This project is built with Django web framework with sqlite3 as backend database. 
 
 ## Installation
 
@@ -33,4 +33,4 @@ We will use virtual environment to make sure it will not mess up user's environm
 	_type 127.0.0.1:8000 in browser (suggest to run in Chrome)_<br><br>
 
 ## Basic Idea
-To predict email address, one need to provide first name, last name and domain. Possible email address is predicted according to the probablities of possible patterns used by a company (domain). If a company is using different patterns, it will return all possible email patterns with corresponding probability (stored in the database). If we cannot verify which pattern to use, we store all possible predicted emails into the database; if we can verify one of them, we just store the verified one into the database and discard the rest. 
+To predict email address, one needs to provide first name, last name and domain. Possible email address is predicted according to the probablities of possible patterns used by a company (domain). If a company is using different patterns, it will return all possible email patterns with corresponding probabilities (stored in the database). If we cannot verify which pattern to use, we store all possible predicted emails into the database; if we can verify one of them, we just store the verified one into the database and discard the rest. 
